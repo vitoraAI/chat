@@ -1,15 +1,252 @@
-// put the js code in YOUR index.html
-// حط الكود ب الاندكس حقك index.html
-// vjmi pulled all of them 👀
-// https://discord.gg/C9e9XUSacc #1
-const msg = `👑 vitora - larxx - https://discord.gg/C9e9XUSacc ! 👑`;
-const body = JSON.stringify({ message: msg });
-setInterval(() => {
-fetch("https://flix-scripts/chatResult", { method: "POST", body });
-fetch("https://danger_chat/Danger_Chat:SendMessage", {method: "POST",body: JSON.stringify({"message": msg,"channel": "شات العام","color": null,"isImageAndLinksAllowed": [false,false]})})
-fetch("https://easy-chat+/o6ZbK5Ecp6", {headers: {accept: "*/*","content-type": "application/x-www-form-urlencoded; charset=UTF-8"},body: JSON.stringify({ message: msg, channel: "شات العام" }),method: "POST"});
-fetch("https://melix_chat/chatResult", { method: "POST", body });
-fetch("https://as_chat/chatResult", { method: "POST", body });
-fetch("https://chat/chatResult", { method: "POST", body });
-fetch("https://ho-chatv2/Chat", {method: "POST",body: JSON.stringify({"Type": "chatResult","message": msg,"chatType": "general"})});
-}, 1000);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 Vitora Webhook Spammer 🔥</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+:root{
+  --bg1:#0b0c17;
+  --bg2:#1c1323;
+  --card:rgba(255,255,255,0.05);
+  --accent1:#ff7f50;
+  --accent2:#ffd700;
+  --text:#f0e6d2;
+  --muted:#b0a48b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif;}
+body{background: linear-gradient(120deg, var(--bg1), var(--bg2)); color: var(--text); min-height:100vh; padding:20px; perspective:1000px;}
+.container{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.header h1{font-size:32px;color:var(--accent2);text-shadow:0 0 10px rgba(255,215,0,0.5);}
+.header p{color:var(--muted);font-size:14px;}
+
+.grid{display:grid;grid-template-columns:1fr 440px;gap:25px;margin-top:25px;}
+.card{
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  padding:25px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 15px 30px rgba(0,0,0,0.4);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover{
+  transform: rotateY(5deg) rotateX(3deg) scale(1.02);
+  box-shadow:0 25px 40px rgba(255,140,0,0.7);
+}
+
+label{display:block;margin-bottom:8px;font-weight:600;color: var(--accent2);text-shadow:0 0 3px rgba(255,215,0,0.5);font-size:15px;}
+input,textarea,select{width:100%;padding:14px;border-radius:12px;border:none;background: rgba(255,255,255,0.05);color:#fff;font-size:15px;}
+input:focus,textarea:focus,select:focus{outline:none;box-shadow:0 0 15px var(--accent1);}
+.small{color: var(--muted); font-size:13px; margin-top:6px;}
+
+.btn{
+  padding:16px 28px;
+  border-radius:16px;
+  border:none;
+  cursor:pointer;
+  font-weight:700;
+  font-size:17px;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary{
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  color:#1a0000;
+  box-shadow:0 0 25px rgba(255,140,0,0.7);
+}
+
+.btn-primary:hover{
+  transform: scale(1.1);
+  box-shadow:0 0 40px rgba(255,140,0,1);
+}
+
+.btn-stop{
+  background:#ff4500;color:#fff;box-shadow:0 0 25px rgba(255,69,0,0.7);
+}
+
+.btn-stop:hover{
+  transform: scale(1.1);
+  box-shadow:0 0 40px rgba(255,69,0,1);
+}
+
+.status-box{
+  background: rgba(255,255,255,0.03);
+  padding:18px;
+  border-radius:16px;
+  min-height:80px;
+  box-shadow: inset 0 0 12px rgba(255,215,0,0.3);
+}
+
+.results{max-height:350px; overflow:auto; margin-top:12px;}
+.result{padding:10px; border-radius:12px; background: rgba(255,215,0,0.1); margin-bottom:10px; color:#fff;}
+.result.err{background: rgba(255,69,0,0.15); color:#ffb3b3;}
+
+.progress{
+  height:14px;
+  background: rgba(255,255,255,0.05);
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:12px;
+  box-shadow:0 0 10px rgba(255,140,0,0.3);
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background: linear-gradient(90deg,var(--accent2),var(--accent1));
+  transition: width .2s linear;
+}
+
+.notice{
+  margin-top:10px;
+  padding:12px;
+  border-radius:14px;
+  background: rgba(255,215,0,0.08);
+  color:#fff;
+  font-size:13px;
+  box-shadow:0 0 12px rgba(255,215,0,0.3);
+}
+
+footer{margin-top:20px;color:var(--muted);font-size:13px;text-align:center;}
+@media(max-width:950px){.grid{grid-template-columns:1fr}}
+#allowedHosts,label[for="allowedHosts"]{display:none;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div>
+      <h1><i class="fas fa-fire"></i>Vitora Webhook Spammer </h1>
+      <p class="small">Only Discord webhooks allowed</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <label>Webhook URLs (one per line)</label>
+      <textarea id="webhooks" rows="5">https://discord.com/api/webhooks/ID/TOKEN</textarea>
+      <div class="small">Only Discord webhooks allowed</div>
+
+      <label style="margin-top:12px;">Message</label>
+      <textarea id="message" rows="4">discord.gg/vtr</textarea>
+
+      <div style="display:flex; gap:10px; margin-top:12px;">
+        <div style="flex:1">
+          <label>Webhook Username (optional)</label>
+          <input id="username" placeholder="Bot name" value="VitoraBot"/>
+        </div>
+        <div style="width:180px">
+          <label>Avatar URL (optional)</label>
+          <input id="avatar" placeholder="https://..." />
+        </div>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center; margin-top:12px;">
+        <div style="flex:1">
+          <label>Repeat Count</label>
+          <input id="repeat" type="number" min="1" value="5"/>
+        </div>
+        <div style="width:180px">
+          <label>Mode</label>
+          <select id="mode"><option value="parallel">Parallel</option><option value="sequential">Sequential</option></select>
+        </div>
+      </div>
+
+      <div id="delayRow" style="display:none; margin-top:10px">
+        <label>Delay (ms) — sequential</label>
+        <input id="delay" type="number" min="0" value="200"/>
+      </div>
+
+      <div style="display:flex; gap:10px; align-items:center; margin-top:12px;">
+        <button id="sendBtn" class="btn btn-primary"><i class="fas fa-rocket"></i> Send</button>
+        <button id="stopBtn" class="btn btn-stop" style="display:none"><i class="fas fa-stop"></i> Stop</button>
+      </div>
+      <div id="filterNotice" class="notice" style="display:none"></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong>Sending status</strong>
+        <span id="progressTxt" class="small"></span>
+      </div>
+
+      <div id="statusBox" class="status-box">Idle</div>
+
+      <div class="progress" id="progressBar" style="display:none;">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+
+      <div style="margin-top:12px;"><strong>Results</strong></div>
+      <div id="results" class="results"></div>
+    </div>
+  </div>
+
+  <footer>Use only on webhooks you own or have permission to test.</footer>
+</div>
+
+<script>
+// JS logic: Discord-only webhook sending (parallel/sequential/stop)
+const webhooksEl = document.getElementById('webhooks');
+const messageEl = document.getElementById('message');
+const usernameEl = document.getElementById('username');
+const avatarEl = document.getElementById('avatar');
+const repeatEl = document.getElementById('repeat');
+const modeEl = document.getElementById('mode');
+const delayRow = document.getElementById('delayRow');
+const delayEl = document.getElementById('delay');
+const sendBtn = document.getElementById('sendBtn');
+const stopBtn = document.getElementById('stopBtn');
+const statusBox = document.getElementById('statusBox');
+const resultsEl = document.getElementById('results');
+const progressBar = document.getElementById('progressBar');
+const progressFill = document.getElementById('progressFill');
+const progressTxt = document.getElementById('progressTxt');
+const filterNotice = document.getElementById('filterNotice');
+
+let abortControllers = [];
+let running = false;
+let total=0, done=0;
+
+modeEl.addEventListener('change', ()=> { delayRow.style.display = (modeEl.value==='sequential')?'block':'none'; });
+
+function hostAllowed(url){try{const u=new URL(url); const h=u.hostname.toLowerCase(); return h==='discord.com'||h.endsWith('.discord.com');}catch(e){return false;}}
+function addResult(text,isErr=false){const d=document.createElement('div'); d.className='result'+(isErr?' err':''); d.textContent=text; resultsEl.prepend(d);}
+function setStatus(t){statusBox.textContent=t;}
+async function postOne(url,payload,ctrl){try{const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl.signal});const txt=await res.text().catch(()=>''); return {ok:res.ok&&res.status>=200&&res.status<300,status:res.status,body:txt};}catch(e){if(ctrl&&ctrl.signal&&ctrl.signal.aborted)return {ok:false,error:'aborted'}; return {ok:false,error:e.toString()};}}
+
+async function runParallel(urls,payload,repeat){
+  const concurrency=30; let q=[]; for(const u of urls) for(let i=1;i<=repeat;i++) q.push({u,i});
+  total=q.length; done=0; progressBar.style.display='block'; progressFill.style.width='0%'; progressTxt.textContent=`0 / ${total}`; setStatus('Running (parallel)'); abortControllers=[]; running=true;
+  async function worker(){while(running && q.length){const task=q.shift();const ctrl=new AbortController();abortControllers.push(ctrl); const res=await postOne(task.u,payload,ctrl); done++; progressFill.style.width=`${Math.round((done/total)*100)}%`; progressTxt.textContent=`${done} / ${total}`; if(res.ok) addResult(`Sent ${task.i} → ${task.u} (status ${res.status})`); else addResult(`Failed ${task.i} → ${task.u} (${res.status||res.error})`,true);}}
+  const workers=[]; for(let i=0;i<concurrency;i++) workers.push(worker()); await Promise.all(workers); running=false; setStatus('Completed (parallel)');}
+
+async function runSequential(urls,payload,repeat,delay){total=urls.length*repeat;done=0;progressBar.style.display='block';progressFill.style.width='0%';progressTxt.textContent=`0 / ${total}`;setStatus('Running (sequential)');abortControllers=[];running=true;
+for(const u of urls){for(let i=1;i<=repeat;i++){if(!running){setStatus('Stopped');return;}const ctrl=new AbortController();abortControllers.push(ctrl);const res=await postOne(u,payload,ctrl);done++;progressFill.style.width=`${Math.round((done/total)*100)}%`;progressTxt.textContent=`${done} / ${total}`;if(res.ok) addResult(`Sent ${i} → ${u} (status ${res.status})`);else addResult(`Failed ${i} → ${u} (${res.status||res.error})`,true);await new Promise(r=>setTimeout(r,delay));}}running=false;setStatus('Completed (sequential)');}
+
+sendBtn.addEventListener('click', async ()=>{
+  resultsEl.innerHTML=''; filterNotice.style.display='none'; filterNotice.textContent='';
+  let urls=webhooksEl.value.split('\n').map(s=>s.trim()).filter(Boolean); if(urls.length===0){alert('Add at least one webhook URL');return;}
+  const allowed=urls.filter(u=>hostAllowed(u)); const filteredCount=urls.length-allowed.length;
+  if(filteredCount>0){filterNotice.style.display='block';filterNotice.textContent=`${filteredCount} URL(s) filtered out (not discord.com)`;}urls=allowed;if(urls.length===0){alert('No allowed URLs to send to');return;}
+  const msg=messageEl.value.trim(); if(!msg){alert('Enter a message');return;}const username=usernameEl.value.trim();const avatar=avatarEl.value.trim();
+  const repeat=Math.max(1,parseInt(repeatEl.value)||1);const mode=modeEl.value;const delay=parseInt(delayEl.value)||200;
+  const payload={content:msg};if(username)payload.username=username;if(avatar)payload.avatar_url=avatar;
+  sendBtn.style.display='none';stopBtn.style.display='inline-flex';
+  try{if(mode==='parallel')await runParallel(urls,payload,repeat);else await runSequential(urls,payload,repeat,delay);}catch(e){addResult('Fatal: '+String(e),true);setStatus('Error');}
+  finally{sendBtn.style.display='inline-flex';stopBtn.style.display='none';abortControllers.forEach(c=>c.abort&&c.abort());running=false;}
+});
+
+stopBtn.addEventListener('click',()=>{abortControllers.forEach(c=>c.abort&&c.abort());running=false;setStatus('Stopped');sendBtn.style.display='inline-flex';stopBtn.style.display='none';});
+</script>
+</body>
+</html>
